@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-@storage_file = open("townhall_emails.txt", 'w')
+@storage_file = open("exo1_townhall_emails.txt", 'w')
 
 
 def get_the_email_of_a_townhall_from_its_webpage(townhall_url)

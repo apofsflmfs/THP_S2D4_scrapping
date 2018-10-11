@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-@storage_file = open("deputy_emails.txt", 'w')
+@storage_file = open("exo3_deputy_emails.txt", 'w')
 
 
 def get_email_from_deputy_url(deputy_url)
