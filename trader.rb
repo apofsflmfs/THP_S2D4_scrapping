@@ -1,8 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-filename = "file.txt"
-@storage_file = open(filename, 'w')
+@storage_file = open("crypto_value.txt", 'w')
 
 
 #technique où on passe par la page de la monnaie pour obtenir le cours de la monnaie => C'est plus rapide
