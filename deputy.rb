@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-@storage_file = open("email_des_deputés.txt", 'w')
+@storage_file = open("deputy_emails.txt", 'w')
 
 
 def get_email_from_deputy_url(deputy_url)
@@ -27,13 +27,27 @@ def get_deputy_url_from_assemblee_page
   return deputy_url
 end
 
+def name_transform(name)
+  first_space = name =~ / /
+  first_name = name[first_space+1..-1]
+  seconde_space = first_name =~ / /
+  last_name = first_name[seconde_space+1..-1]
+  first_name = first_name[0...seconde_space]
+  return [first_name,last_name]
+end
+
 def perform
-  result = {}
+  result = []
+
   get_deputy_url_from_assemblee_page.each do |deputy_name, deputy_url|
-    result[deputy_name] = get_email_from_deputy_url(deputy_url)
-    @storage_file.write("#{deputy_name} peut être contacté(e) à #{result[deputy_name]}")
+    full_name = name_transform(deputy_name)
+    deputy_email = get_email_from_deputy_url(deputy_url)
+    result << {:first_name => full_name[0], :last_name => full_name[1], :email => deputy_email} 
+    @storage_file.write("#{deputy_name} peut être contacté(e) à #{deputy_email}")
     @storage_file.write("\n")
   end
+  @storage_file.write("******* Tableau de hash final*******\n")
+  @storage_file.write("#{result}")
   puts result
 end
 
