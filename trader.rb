@@ -28,13 +28,23 @@ def perform
     @storage_file.write("*********************enregistrement de #{Time.now.strftime("%d/%m/%Y %H:%M")}*********************")
     @storage_file.write("\n") 
     @storage_file.write(get_crypto_value_short('https://coinmarketcap.com/all/views/all/'))
+    puts "boucle n°#{i} terminée. En sleep......"
 
-    sleep(1800)
+    sleep(600)
     i +=1
   end
 end
 
 perform
+
+#technique où on récupère le row
+def get_crypto_value_by_row (coinmarket_url)
+  page = Nokogiri::HTML(open(coinmarket_url))
+  puts "=> page chargée"
+  crypto_row = page.xpath('//tr')
+  puts crypto_row[1]
+end 
+# get_crypto_value_by_row('https://coinmarketcap.com/all/views/all/')
 
 
 
