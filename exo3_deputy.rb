@@ -6,6 +6,7 @@ require 'open-uri'
 
 def get_email_from_deputy_url(deputy_url)
   page = Nokogiri::HTML(open(deputy_url))
+  #better!!! => email = page.xpath("//a[starts-with(@href, 'mailto')]")
   page_as = page.xpath('//dd/ul/li/a')
   page_as.each do |page_a|
     href = page_a['href']

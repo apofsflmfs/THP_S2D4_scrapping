@@ -10,7 +10,7 @@ def get_crypto_value_short(coinmarket_url)
   puts "page chargée =>> ok"
   crypto_as = page.xpath('//a[contains(@class, "currency-name-container")]')
   prices = page.xpath('//a[@class = "price"]')
-  result ={}
+  result = {}
   crypto_as.each_with_index do |crypto_a, index|
     crypto_name = crypto_a.text
     crypto_price = prices[index].text
